@@ -45,8 +45,23 @@ public class PlayerMovement : MonoBehaviour
 
     bool IsValidPosition(Vector2Int position)
     {
-        return position.x >= 0 && position.x < gridManager.width &&
-               position.y >= 0 && position.y < gridManager.height;
+        // Check if the position is outside the grid bounds
+    if (position.x < 0 || position.x >= gridManager.width || position.y < 0 || position.y >= gridManager.height)
+    {
+        return false; // Position is outside the grid, invalid
+    }
+
+    // Check if the tile is occupied by an enemy
+    Tile targetTile = gridManager.GetTileAtPosition(position);
+    GameObject occupant = targetTile.GetOccupant();
+
+    if (occupant != null && occupant.CompareTag("Enemy"))
+    {
+        return false; // Tile is occupied by an enemy, player cannot move here
+    }
+
+    return true; // Position is valid
+
     }
 
     IEnumerator MoveToPosition(Vector2Int targetPosition)

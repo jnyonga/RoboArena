@@ -10,12 +10,15 @@ public class GridManager : MonoBehaviour
 
    [SerializeField] private Transform cam;
 
-    void Start()
+   private Tile[,] tiles;
+
+    void Awake()
     {
         GenerateGrid();
     }
     void GenerateGrid()
    {
+        tiles = new Tile[width,height];
         for (int x = 0; x < width; x++)
         {
             for(int y = 0; y < height; y++)
@@ -25,9 +28,21 @@ public class GridManager : MonoBehaviour
 
                 var isOffset = (x % 2 == 0 && y % 2 != 0) || (x % 2 != 0 && y % 2 == 0);
                 spawnedTile.Init(isOffset);
+
+                tiles[x,y] = spawnedTile;
             }
         }
 
         cam.transform.position = new Vector3((float)width/2 - 0.5f, (float)height/2 - 0.5f, -10);
    }
+
+   public Tile GetTileAtPosition(Vector2Int position)
+    {
+        if (position.x >= 0 && position.x < width && position.y >= 0 && position.y < height)
+        {
+            return tiles[position.x, position.y]; // Return the tile at the specified position
+        }
+
+        return null; // If the position is out of bounds, return null
+    }
 }

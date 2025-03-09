@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 603801268385739399}
   - component: {fileID: 1450190662138466570}
   - component: {fileID: 5200007644004973358}
+  - component: {fileID: -5371698043507780215}
   m_Layer: 0
   m_Name: Big Guy
   m_TagString: Enemy
@@ -162,3 +163,17 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &-5371698043507780215
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5509304452831863492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d2d5bffe46ae441fa970f8f9c4f5376, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 3
+  maxHealth: 3
