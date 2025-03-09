@@ -7,6 +7,7 @@ public class Tile : MonoBehaviour
     [SerializeField] private Color baseColor, offsetColor;
     [SerializeField] private SpriteRenderer renderer;
     [SerializeField] private GameObject highlight;
+    [SerializeField] private GameObject attackHighlight;
 
     [SerializeField] private GameObject occupant;
 
@@ -14,7 +15,15 @@ public class Tile : MonoBehaviour
      {
         renderer.color = isOffset ? offsetColor : baseColor;
      }
+    public void HoverAttack()
+    {
+        attackHighlight.SetActive(true);
+    }
 
+    public void DeselectAttack()
+    {
+        attackHighlight.SetActive(false);
+    }
     void OnMouseEnter()
     {
         highlight.SetActive(true);
@@ -47,4 +56,5 @@ public class Tile : MonoBehaviour
             SetOccupant(null);
         }
     }
+    
 }

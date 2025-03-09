@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [SerializeField] private MoveManager moveManager; 
+    private Vector2Int currentPosition;
     [SerializeField] public float moveTime = 0.2f;
     private Vector2Int gridPosition;
     private bool isMoving = false;
@@ -12,16 +14,21 @@ public class PlayerMovement : MonoBehaviour
     void Awake()
     {
         gridManager = GameObject.FindGameObjectWithTag("Grid Manager").GetComponent<GridManager>();
+        moveManager = GameObject.FindGameObjectWithTag("Move Manager").GetComponent<MoveManager>();
     }
     void Start()
     {
         gridPosition = Vector2Int.RoundToInt(transform.position);
         transform.position = new Vector2(gridPosition.x, gridPosition.y);
+
+        currentPosition = Vector2Int.RoundToInt(transform.position);
     }
 
    
     void Update()
     {
+        PlayerAttack();
+
         if(!isMoving)
         {
             Vector2Int moveDirection = Vector2Int.zero;
@@ -81,5 +88,18 @@ public class PlayerMovement : MonoBehaviour
         transform.position = endPosition;
         gridPosition = targetPosition;
         isMoving = false;
+    }
+
+    public void PlayerAttack()
+    {
+        // Detect mouse click on the grid
+        if (Input.GetMouseButtonDown(0)) // Left mouse button
+        {
+            Vector2 worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector2Int targetPosition = new Vector2Int(Mathf.FloorToInt(worldPosition.x), Mathf.FloorToInt(worldPosition.y));
+
+            // Perform attack on the selected tile
+            moveManager.PerformAttack(targetPosition);
+        }
     }
 }

@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GridManager gridManager;
     [SerializeField] private GameObject playerPrefab;
     [SerializeField] private string playerSpawnTileName;
+    [SerializeField] private MoveManager moveManager;
     private GameObject playerInstance;
 
     public enum GameState
@@ -46,12 +47,15 @@ public class GameManager : MonoBehaviour
     {
         Instance = this;
         gridManager = GameObject.FindGameObjectWithTag("Grid Manager").GetComponent<GridManager>();
+        moveManager = GameObject.FindGameObjectWithTag("Move Manager").GetComponent<MoveManager>();
     }
 
     void Start()
     {
         SpawnPlayerAtTileName(playerSpawnTileName);
         UpdateGameState(GameState.Playerturn);
+
+        moveManager.InitializePlayer();
     }
     public void SpawnPlayerAtTileName(string tileName)
     {
