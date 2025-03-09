@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class GridManager : MonoBehaviour
 {
-   [SerializeField] private int width, height;
+   [SerializeField] public int width, height;
 
    [SerializeField] private Tile tilePrefab;
 
