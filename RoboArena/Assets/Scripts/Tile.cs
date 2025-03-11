@@ -11,15 +11,16 @@ public class Tile : MonoBehaviour
 
     [SerializeField] private GameObject occupant;
 
-     public void Init(bool isOffset)
-     {
+    public void Init(bool isOffset)
+    {
         renderer.color = isOffset ? offsetColor : baseColor;
-     }
+    }
     public void HoverAttack()
     {
         attackHighlight.SetActive(true);
     }
 
+    // Disable attack highlight
     public void DeselectAttack()
     {
         attackHighlight.SetActive(false);
@@ -55,6 +56,11 @@ public class Tile : MonoBehaviour
         {
             SetOccupant(null);
         }
+    }
+
+    public void HighlightAttack(bool shouldHighlight)
+    {
+        attackHighlight.SetActive(shouldHighlight);
     }
     
 }
