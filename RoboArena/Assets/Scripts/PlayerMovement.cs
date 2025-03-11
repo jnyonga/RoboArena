@@ -27,7 +27,7 @@ public class PlayerMovement : MonoBehaviour
    
     void Update()
     {
-        PlayerAttack();
+        
 
         if(!isMoving)
         {
@@ -90,16 +90,5 @@ public class PlayerMovement : MonoBehaviour
         isMoving = false;
     }
 
-    public void PlayerAttack()
-    {
-        // Detect mouse click on the grid
-        if (Input.GetMouseButtonDown(0)) // Left mouse button
-        {
-            Vector2 worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            Vector2Int targetPosition = new Vector2Int(Mathf.FloorToInt(worldPosition.x), Mathf.FloorToInt(worldPosition.y));
-
-            // Perform attack on the selected tile
-            moveManager.PerformAttack(targetPosition);
-        }
-    }
+    
 }
