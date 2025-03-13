@@ -12,6 +12,8 @@ public class GridManager : MonoBehaviour
 
    private Tile[,] tiles;
 
+   private List<Tile> allTiles = new List<Tile>();
+
     void Awake()
     {
         GenerateGrid();
@@ -30,6 +32,7 @@ public class GridManager : MonoBehaviour
                 spawnedTile.Init(isOffset);
 
                 tiles[x,y] = spawnedTile;
+                allTiles.Add(spawnedTile);
             }
         }
 
@@ -45,4 +48,9 @@ public class GridManager : MonoBehaviour
 
         return null; // If the position is out of bounds, return null
     }
+
+    public List<Tile> GetAllTiles()
+   {
+        return allTiles; // Return the list of all tiles
+   }
 }

@@ -269,3 +269,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bc0e56c96c3b4b2b99e2a5a3a8777e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridManager: {fileID: 0}
+  moveManager: {fileID: 0}
+  isReady: 0

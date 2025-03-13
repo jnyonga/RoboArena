@@ -55,4 +55,5 @@ public class MoveManager : MonoBehaviour
         
         return dir;
     }
+    
 }

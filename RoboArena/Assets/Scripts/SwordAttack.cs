@@ -7,6 +7,8 @@ public class SwordAttack : MonoBehaviour
     private Tile lastFacingTile;
     private Tile lastSideTile1;
     private Tile lastSideTile2;
+
+    public bool isReady = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -17,9 +19,12 @@ public class SwordAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        DetectTilePlayerIsFacing();
+        if (isReady)
+        {
+            DetectTilePlayerIsFacing();
         
-        Attack();
+            Attack();
+        }
     }
 
     void DetectTilePlayerIsFacing()
@@ -106,7 +111,7 @@ public class SwordAttack : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Space))
         {
             Damage();
-
+            isReady = false;
             GameManager.Instance.UpdateGameState(GameManager.GameState.Enemyturn);
         }
     }

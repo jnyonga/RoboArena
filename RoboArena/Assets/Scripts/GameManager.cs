@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -11,7 +12,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject playerPrefab;
     [SerializeField] private string playerSpawnTileName;
     [SerializeField] private MoveManager moveManager;
-    private GameObject playerInstance;
+    public GameObject playerInstance;
 
     public enum GameState
     {
@@ -98,6 +99,14 @@ public class GameManager : MonoBehaviour
     IEnumerator EnemyTurn()
     {
         Debug.Log("Enemy turn started.");
+
+        List<Tile> allTiles = gridManager.GetAllTiles(); // Get all tiles
+
+        foreach (Tile tile in allTiles)
+        {
+            tile.DeselectAttack();
+        }
+
         yield return new WaitForSeconds(1f); // Simulate enemy actions
         Debug.Log("Enemy turn ended.");
         UpdateGameState(GameState.Playerturn);
