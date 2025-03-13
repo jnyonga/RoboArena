@@ -357,6 +357,17 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &377216723 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7884296215726406912, guid: 9019f4675010c43a7bdf4827d30fe290, type: 3}
+  m_PrefabInstance: {fileID: 888545660377571697}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79f099c6b1dd54ce69a7ed1094d1e339, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1000,6 +1011,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1342439901354965314, guid: 45e19a4c5a8294f919a5a9fe6c6b8949, type: 3}
+      propertyPath: moveManager
+      value: 
+      objectReference: {fileID: 377216723}
     - target: {fileID: 1342439901354965314, guid: 45e19a4c5a8294f919a5a9fe6c6b8949, type: 3}
       propertyPath: spawnTileName
       value: Tile 4 4

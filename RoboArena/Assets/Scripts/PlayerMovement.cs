@@ -27,7 +27,8 @@ public class PlayerMovement : MonoBehaviour
    
     void Update()
     {
-        
+        if (GameManager.Instance.State != GameManager.GameState.Playerturn)
+            return;
 
         if(!isMoving)
         {
@@ -88,6 +89,8 @@ public class PlayerMovement : MonoBehaviour
         transform.position = endPosition;
         gridPosition = targetPosition;
         isMoving = false;
+
+        GameManager.Instance.UpdateGameState(GameManager.GameState.Enemyturn);
     }
 
     

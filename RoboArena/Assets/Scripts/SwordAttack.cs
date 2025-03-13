@@ -100,9 +100,14 @@ public class SwordAttack : MonoBehaviour
 
     void Attack()
     {
+        if (GameManager.Instance.State != GameManager.GameState.Playerturn)
+        return;
+
         if(Input.GetKeyDown(KeyCode.Space))
         {
             Damage();
+
+            GameManager.Instance.UpdateGameState(GameManager.GameState.Enemyturn);
         }
     }
 

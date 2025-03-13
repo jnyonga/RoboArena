@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -92,11 +91,15 @@ public class GameManager : MonoBehaviour
 
     IEnumerator PlayerTurn()
     {
+        Debug.Log("Player turn started.");
         yield return null;
     }
 
     IEnumerator EnemyTurn()
     {
-        yield return null;
+        Debug.Log("Enemy turn started.");
+        yield return new WaitForSeconds(1f); // Simulate enemy actions
+        Debug.Log("Enemy turn ended.");
+        UpdateGameState(GameState.Playerturn);
     }
 }

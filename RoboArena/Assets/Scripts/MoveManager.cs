@@ -24,20 +24,35 @@ public class MoveManager : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.Q)) // Rotate clockwise
         {
-            RotatePlayer();
+            RotatePlayer(-90);
         }
+        else if (Input.GetKeyDown(KeyCode.E)) // Rotate counterclockwise
+        {
+            RotatePlayer(90);
+        }
+        
     }
 
-    void RotatePlayer()
+    void RotatePlayer(float angle)
     {
-        facingDirection = RotateVector(facingDirection);
-        player.transform.Rotate(0, 0, -90); // Visually rotate the player 90 degrees clockwise
+        if (GameManager.Instance.State != GameManager.GameState.Playerturn)
+        return;
+
+        facingDirection = RotateVector(facingDirection, angle);
+        player.transform.Rotate(0, 0, angle);
+
+        GameManager.Instance.UpdateGameState(GameManager.GameState.Enemyturn);
     }
 
-    Vector2Int RotateVector(Vector2Int dir)
+    Vector2Int RotateVector(Vector2Int dir, float angle)
     {
-        return new Vector2Int(dir.y, -dir.x); // Always rotates 90 degrees clockwise
+        if (angle == -90) // Clockwise rotation
+            return new Vector2Int(dir.y, -dir.x);
+        else if (angle == 90) // Counterclockwise rotation
+            return new Vector2Int(-dir.y, dir.x);
+        
+        return dir;
     }
 }
