@@ -18,6 +18,8 @@ public class SwordAttack : MonoBehaviour
     void Update()
     {
         DetectTilePlayerIsFacing();
+        
+        Attack();
     }
 
     void DetectTilePlayerIsFacing()
@@ -93,6 +95,34 @@ public class SwordAttack : MonoBehaviour
         {
             // Use the DeselectAttack method to remove the highlight
             tile.DeselectAttack();
+        }
+    }
+
+    void Attack()
+    {
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            Damage();
+        }
+    }
+
+    void Damage()
+    {
+        DealDamageToTile(lastFacingTile);
+        DealDamageToTile(lastSideTile1);
+        DealDamageToTile(lastSideTile2);
+    }
+
+    void DealDamageToTile(Tile tile)
+    {
+        if (tile != null)
+        {
+            GameObject enemy = tile.GetComponent<Tile>().GetOccupant(); // Assuming the enemy is stored in the tile or has a reference
+            if (enemy != null)
+            {
+                enemy.GetComponent<EnemyHealth>().TakeDamage(2); // Apply damage to the enemy
+                Debug.Log("Enemy on " + tile.name + " took damage!");
+            }
         }
     }
 }
