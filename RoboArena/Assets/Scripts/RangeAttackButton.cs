@@ -2,8 +2,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
-public class SwordButton : MonoBehaviour
+
+public class RangeAttackButton : MonoBehaviour
 {
     private GameObject player;
     public List<Image> cooldownBlockList;
@@ -13,26 +13,27 @@ public class SwordButton : MonoBehaviour
     private Button button;
     private Color defaultColor;
     private Color selectedColor = Color.green;
-    
+
     void Start()
     {
         button = GetComponent<Button>();
         buttonImage = GetComponent<Image>();
         defaultColor = buttonImage.color;
         GameManager.Instance.GetComponent<GameManager>().playerInstance = player;
-
     }
 
     void Update()
     {
         if(player != null)
         {
-            switch(player.GetComponent<SwordAttack>().cooldownTurns)
+            switch(player.GetComponent<RangeAttack>().cooldownTurns)
             {
                 case(0):
                     cooldownBlockList[0].color = Color.grey;
                     cooldownBlockList[1].color = Color.grey;
                     cooldownBlockList[2].color = Color.grey;
+                    cooldownBlockList[3].color = Color.grey;
+                    cooldownBlockList[4].color = Color.grey;
                     break;
                 case(1):
                     cooldownBlockList[0].color = Color.black;
@@ -43,18 +44,24 @@ public class SwordButton : MonoBehaviour
                 case(3):
                     cooldownBlockList[2].color = Color.black;
                     break;
+                case(4):
+                    cooldownBlockList[3].color = Color.black;
+                    break;
+                case(5):
+                    cooldownBlockList[5].color = Color.black;
+                    break;
             }
 
-            if (player.GetComponent<SwordAttack>().cooldownTurns < 3)
+            if (player.GetComponent<RangeAttack>().cooldownTurns < 5)
             {
                 button.interactable = false;  // Make button non-interactable
                 buttonImage.color = new Color(190,190,190);
             }
             else
             {
-                button.interactable = true;  // Enable button when cooldown is at 3
+                button.interactable = true;  // Enable button when cooldown is at 5
 
-                if (player.GetComponent<SwordAttack>().isReady == false)
+                if (player.GetComponent<RangeAttack>().isReady == false)
                 {
                     buttonImage.color = defaultColor;
                 }
@@ -66,17 +73,17 @@ public class SwordButton : MonoBehaviour
         }
         
     }
+
     public void ToggleSelection()
     {
         isSelected = !isSelected;
         buttonImage.color = isSelected ? selectedColor : defaultColor;
 
-        player.GetComponent<SwordAttack>().isReady = isSelected;
+        player.GetComponent<RangeAttack>().isReady = isSelected;
         Debug.Log("Button clicked. Attack selected: " + isSelected);
 
         
 
         GameManager.Instance.UpdateGameState(GameManager.GameState.Enemyturn);
     }
-
 }

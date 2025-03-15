@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private string playerSpawnTileName;
     [SerializeField] private MoveManager moveManager;
     public GameObject playerInstance;
+    public int attackTime;
 
     public enum GameState
     {
@@ -98,7 +99,11 @@ public class GameManager : MonoBehaviour
 
     IEnumerator EnemyTurn()
     {
+        yield return new WaitForSeconds(attackTime);
+
         Debug.Log("Enemy turn started.");
+
+        attackTime = 0;
 
         List<Tile> allTiles = gridManager.GetAllTiles(); // Get all tiles
 
@@ -107,8 +112,8 @@ public class GameManager : MonoBehaviour
             tile.DeselectAttack();
         }
 
-        yield return new WaitForSeconds(1f); // Simulate enemy actions
-        Debug.Log("Enemy turn ended.");
+        yield return new WaitForSeconds(0f); // Simulate enemy actions
+        //Debug.Log("Enemy turn ended.");
         UpdateGameState(GameState.Playerturn);
     }
 }

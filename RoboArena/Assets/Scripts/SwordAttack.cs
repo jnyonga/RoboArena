@@ -9,21 +9,43 @@ public class SwordAttack : MonoBehaviour
     private Tile lastSideTile2;
 
     public bool isReady = false;
+    private bool justAttacked = true;
+    public int cooldownTurns = 3;
+
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         gridManager = GameObject.FindGameObjectWithTag("Grid Manager").GetComponent<GridManager>();
         moveManager = GameObject.FindGameObjectWithTag("Move Manager").GetComponent<MoveManager>();
+        GameManager.OnGameStateChanged += HandleTurnChange;
+        cooldownTurns = 3;
+    }
+    void OnDestroy()
+    {
+        GameManager.OnGameStateChanged -= HandleTurnChange; // Unsubscribe to avoid memory leaks
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (isReady)
+        if (isReady && cooldownTurns == 3)
         {
             DetectTilePlayerIsFacing();
         
             Attack();
+        }
+    }
+    void HandleTurnChange(GameManager.GameState state)
+    {
+        if (state == GameManager.GameState.Playerturn)
+        {
+            if(!justAttacked && cooldownTurns < 3)
+            {
+                cooldownTurns++; // Reduce cooldown when a new player turn starts
+            }
+            
+            justAttacked = false;
         }
     }
 
@@ -71,7 +93,7 @@ public class SwordAttack : MonoBehaviour
         lastSideTile2 = sideTile2;
 
         // Log detected tiles
-        if (facingTile != null)
+        /*if (facingTile != null)
             Debug.Log("Player is facing tile: " + facingTile.name);
         else
             Debug.Log("Player is facing an empty space.");
@@ -81,6 +103,7 @@ public class SwordAttack : MonoBehaviour
 
         if (sideTile2 != null)
             Debug.Log("Side tile 2: " + sideTile2.name);
+        */
     }
     void HighlightTile(Tile tile, bool shouldHighlight)
     {
@@ -105,13 +128,18 @@ public class SwordAttack : MonoBehaviour
 
     void Attack()
     {
-        if (GameManager.Instance.State != GameManager.GameState.Playerturn)
-        return;
+        if (GameManager.Instance.State != GameManager.GameState.Playerturn || cooldownTurns < 1)
+        {
+            return;
+        }
 
         if(Input.GetKeyDown(KeyCode.Space))
         {
+            GameManager.Instance.GetComponent<GameManager>().attackTime = 1;
             Damage();
             isReady = false;
+            cooldownTurns = 0;
+            justAttacked = true;
             GameManager.Instance.UpdateGameState(GameManager.GameState.Enemyturn);
         }
     }
