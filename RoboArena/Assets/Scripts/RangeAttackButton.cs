@@ -82,8 +82,6 @@ public class RangeAttackButton : MonoBehaviour
         player.GetComponent<RangeAttack>().isReady = isSelected;
         Debug.Log("Button clicked. Attack selected: " + isSelected);
 
-        
-
         GameManager.Instance.UpdateGameState(GameManager.GameState.Enemyturn);
     }
 }
