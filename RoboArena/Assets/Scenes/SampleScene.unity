@@ -248,6 +248,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0dbd2ed5f12343d98433269e68e92f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cooldownBlockList:
+  - {fileID: 393435356}
+  - {fileID: 583901702}
+  - {fileID: 706029844}
+  - {fileID: 1979165525}
+  - {fileID: 371488228}
 --- !u!114 &324697861
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -292,13 +298,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 324697858}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+      - m_Target: {fileID: 324697860}
+        m_TargetAssemblyTypeName: RangeAttackButton, Assembly-CSharp
+        m_MethodName: ToggleSelection
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -2134,15 +2140,39 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1963092274565204133, guid: 415b84869ab8a4eb5a0fba9d31364fba, type: 3}
       propertyPath: enemiesToSpawn.Array.size
-      value: 1
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1963092274565204133, guid: 415b84869ab8a4eb5a0fba9d31364fba, type: 3}
       propertyPath: enemiesToSpawn.Array.data[0].enemyPrefab
       value: 
       objectReference: {fileID: 5509304452831863492, guid: caef5d97fe67f43ec861dd601c03dd30, type: 3}
     - target: {fileID: 1963092274565204133, guid: 415b84869ab8a4eb5a0fba9d31364fba, type: 3}
+      propertyPath: enemiesToSpawn.Array.data[1].enemyPrefab
+      value: 
+      objectReference: {fileID: 5509304452831863492, guid: caef5d97fe67f43ec861dd601c03dd30, type: 3}
+    - target: {fileID: 1963092274565204133, guid: 415b84869ab8a4eb5a0fba9d31364fba, type: 3}
+      propertyPath: enemiesToSpawn.Array.data[2].enemyPrefab
+      value: 
+      objectReference: {fileID: 5509304452831863492, guid: caef5d97fe67f43ec861dd601c03dd30, type: 3}
+    - target: {fileID: 1963092274565204133, guid: 415b84869ab8a4eb5a0fba9d31364fba, type: 3}
+      propertyPath: enemiesToSpawn.Array.data[3].enemyPrefab
+      value: 
+      objectReference: {fileID: 5509304452831863492, guid: caef5d97fe67f43ec861dd601c03dd30, type: 3}
+    - target: {fileID: 1963092274565204133, guid: 415b84869ab8a4eb5a0fba9d31364fba, type: 3}
       propertyPath: enemiesToSpawn.Array.data[0].spawnTileName
       value: Tile 4 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1963092274565204133, guid: 415b84869ab8a4eb5a0fba9d31364fba, type: 3}
+      propertyPath: enemiesToSpawn.Array.data[1].spawnTileName
+      value: Tile 2 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1963092274565204133, guid: 415b84869ab8a4eb5a0fba9d31364fba, type: 3}
+      propertyPath: enemiesToSpawn.Array.data[2].spawnTileName
+      value: Tile 5 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1963092274565204133, guid: 415b84869ab8a4eb5a0fba9d31364fba, type: 3}
+      propertyPath: enemiesToSpawn.Array.data[3].spawnTileName
+      value: Tile 4 0
       objectReference: {fileID: 0}
     - target: {fileID: 3548113891011671854, guid: 415b84869ab8a4eb5a0fba9d31364fba, type: 3}
       propertyPath: m_LocalPosition.x

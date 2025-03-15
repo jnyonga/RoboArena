@@ -7,12 +7,14 @@ public class RangeAttackButton : MonoBehaviour
 {
     private GameObject player;
     public List<Image> cooldownBlockList;
-
+    private MoveManager moveManager;
     private bool isSelected = false;
     private Image buttonImage;
     private Button button;
     private Color defaultColor;
     private Color selectedColor = Color.green;
+    
+    private RangeAttack rangeAttack;
 
     void Start()
     {
@@ -20,12 +22,16 @@ public class RangeAttackButton : MonoBehaviour
         buttonImage = GetComponent<Image>();
         defaultColor = buttonImage.color;
         GameManager.Instance.GetComponent<GameManager>().playerInstance = player;
+        moveManager = MoveManager.FindAnyObjectByType<MoveManager>();
+
     }
 
     void Update()
     {
         if(player != null)
         {
+            rangeAttack = player.GetComponent<RangeAttack>();
+
             switch(player.GetComponent<RangeAttack>().cooldownTurns)
             {
                 case(0):
@@ -48,7 +54,7 @@ public class RangeAttackButton : MonoBehaviour
                     cooldownBlockList[3].color = Color.black;
                     break;
                 case(5):
-                    cooldownBlockList[5].color = Color.black;
+                    cooldownBlockList[4].color = Color.black;
                     break;
             }
 
@@ -79,10 +85,12 @@ public class RangeAttackButton : MonoBehaviour
         isSelected = !isSelected;
         buttonImage.color = isSelected ? selectedColor : defaultColor;
 
-        player.GetComponent<RangeAttack>().isReady = isSelected;
-        Debug.Log("Button clicked. Attack selected: " + isSelected);
+        if (isSelected)
+        {
+            moveManager.GetComponent<MoveManager>().AddMoveToQueue(rangeAttack);
+        }
 
-        
+        Debug.Log("Range Attack Selected: " + isSelected);
 
         GameManager.Instance.UpdateGameState(GameManager.GameState.Enemyturn);
     }

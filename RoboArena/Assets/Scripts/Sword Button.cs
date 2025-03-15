@@ -7,12 +7,13 @@ public class SwordButton : MonoBehaviour
 {
     private GameObject player;
     public List<Image> cooldownBlockList;
-
+    private MoveManager moveManager;
     private bool isSelected = false;
     private Image buttonImage;
     private Button button;
     private Color defaultColor;
     private Color selectedColor = Color.green;
+    private SwordAttack swordAttack;
     
     void Start()
     {
@@ -20,13 +21,15 @@ public class SwordButton : MonoBehaviour
         buttonImage = GetComponent<Image>();
         defaultColor = buttonImage.color;
         GameManager.Instance.GetComponent<GameManager>().playerInstance = player;
-
+        moveManager = MoveManager.FindAnyObjectByType<MoveManager>();
     }
 
     void Update()
     {
         if(player != null)
         {
+            swordAttack = player.GetComponent<SwordAttack>();
+
             switch(player.GetComponent<SwordAttack>().cooldownTurns)
             {
                 case(0):
@@ -71,10 +74,13 @@ public class SwordButton : MonoBehaviour
         isSelected = !isSelected;
         buttonImage.color = isSelected ? selectedColor : defaultColor;
 
-        player.GetComponent<SwordAttack>().isReady = isSelected;
-        Debug.Log("Button clicked. Attack selected: " + isSelected);
+        if (isSelected && swordAttack != null)
+        {
+            // Add the existing SwordAttack component to the move queue
+            moveManager.GetComponent<MoveManager>().AddMoveToQueue(swordAttack);
+        }
 
-        
+        Debug.Log("Sword Attack Selected: " + isSelected);
 
         GameManager.Instance.UpdateGameState(GameManager.GameState.Enemyturn);
     }

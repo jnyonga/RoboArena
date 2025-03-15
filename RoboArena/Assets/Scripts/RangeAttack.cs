@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
 
-public class RangeAttack : MonoBehaviour
+public class RangeAttack : MonoBehaviour, IPlayerMove
 {
     public GridManager gridManager;
     public MoveManager moveManager;
@@ -11,6 +11,7 @@ public class RangeAttack : MonoBehaviour
     public int cooldownTurns = 5;
     
     private Tile lastFacingTile; // To store the last tile the player faced
+    private Tile closestOccupantTile;
 
     void Start()
     {
@@ -30,9 +31,6 @@ public class RangeAttack : MonoBehaviour
         if (isReady && cooldownTurns == 5)
         {
             DetectTilePlayerIsFacing();
-        
-            // If you want to trigger attack, you can call it here (e.g., when the player presses a button)
-            // Attack();
         }
     }
 
@@ -59,6 +57,9 @@ public class RangeAttack : MonoBehaviour
         // Initialize list to store detected tiles
         List<Tile> detectedTiles = new List<Tile>();
 
+        // Initialize the closest occupant tile to null
+        closestOccupantTile = null;
+
         // Start detecting in the facing direction
         Vector2Int currentTilePos = playerGridPos + direction;
 
@@ -71,6 +72,15 @@ public class RangeAttack : MonoBehaviour
             {
                 // Add the tile to the detected list
                 detectedTiles.Add(currentTile);
+
+                // Check if the tile has an occupant
+                GameObject occupant = currentTile.GetOccupant();
+                if (occupant != null)
+                {
+                    // If an occupant is found, set this tile as the closest occupant tile
+                    closestOccupantTile = currentTile;
+                    break; // Stop detecting further since we found the closest enemy
+                }
             }
             else
             {
@@ -109,6 +119,44 @@ public class RangeAttack : MonoBehaviour
         if (tile != null)
         {
             tile.DeselectAttack();
+        }
+    }
+    public void PerformAttack()
+    {
+        if (GameManager.Instance.State != GameManager.GameState.Playerturn || cooldownTurns < 1)
+        {
+            return;
+        }
+
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            GameManager.Instance.GetComponent<GameManager>().attackTime = 1;
+            Damage();
+            isReady = false;
+            cooldownTurns = 0;
+            justAttacked = true;
+            //GameManager.Instance.UpdateGameState(GameManager.GameState.Enemyturn);
+        }
+    }
+
+    void Damage()
+    {
+        if (closestOccupantTile != null)
+        {
+            DealDamageToTile(closestOccupantTile);
+        }
+    }
+
+    void DealDamageToTile(Tile tile)
+    {
+        if (tile != null)
+        {
+            GameObject enemy = tile.GetOccupant(); // Assuming the enemy is stored in the tile or has a reference
+            if (enemy != null)
+            {
+                enemy.GetComponent<EnemyHealth>().TakeDamage(2); // Apply damage to the enemy
+                Debug.Log("Enemy on " + tile.name + " took damage!");
+            }
         }
     }
 }

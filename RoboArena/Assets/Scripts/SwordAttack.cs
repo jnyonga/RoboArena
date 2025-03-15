@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class SwordAttack : MonoBehaviour
+public class SwordAttack : MonoBehaviour, IPlayerMove
 {
     public GridManager gridManager;
     public MoveManager moveManager;
@@ -32,8 +32,6 @@ public class SwordAttack : MonoBehaviour
         if (isReady && cooldownTurns == 3)
         {
             DetectTilePlayerIsFacing();
-        
-            Attack();
         }
     }
     void HandleTurnChange(GameManager.GameState state)
@@ -126,7 +124,7 @@ public class SwordAttack : MonoBehaviour
         }
     }
 
-    void Attack()
+    public void PerformAttack()
     {
         if (GameManager.Instance.State != GameManager.GameState.Playerturn || cooldownTurns < 1)
         {
@@ -140,7 +138,7 @@ public class SwordAttack : MonoBehaviour
             isReady = false;
             cooldownTurns = 0;
             justAttacked = true;
-            GameManager.Instance.UpdateGameState(GameManager.GameState.Enemyturn);
+            //GameManager.Instance.UpdateGameState(GameManager.GameState.Enemyturn);
         }
     }
 
