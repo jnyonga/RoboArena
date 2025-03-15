@@ -101,6 +101,7 @@ GameObject:
   - component: {fileID: 7546789728510704496}
   - component: {fileID: 7056732019602538514}
   - component: {fileID: 117052846613263254}
+  - component: {fileID: 2208558762839391178}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -272,3 +273,20 @@ MonoBehaviour:
   gridManager: {fileID: 0}
   moveManager: {fileID: 0}
   isReady: 0
+  cooldownTurns: 0
+--- !u!114 &2208558762839391178
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1755758504037703636}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb6d7eaa7e7742da842f5c97dd92d22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gridManager: {fileID: 0}
+  moveManager: {fileID: 0}
+  isReady: 0
+  cooldownTurns: 5

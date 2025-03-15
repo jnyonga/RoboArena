@@ -248,7 +248,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0dbd2ed5f12343d98433269e68e92f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cooldownBlockList: []
+  player: {fileID: 0}
+  cooldownBlockList:
+  - {fileID: 393435356}
+  - {fileID: 583901702}
+  - {fileID: 706029844}
+  - {fileID: 1979165525}
+  - {fileID: 371488228}
 --- !u!114 &324697861
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 public class RangeAttackButton : MonoBehaviour
 {
-    private GameObject player;
+    public GameObject player;
     public List<Image> cooldownBlockList;
 
     private bool isSelected = false;
@@ -48,7 +48,7 @@ public class RangeAttackButton : MonoBehaviour
                     cooldownBlockList[3].color = Color.black;
                     break;
                 case(5):
-                    cooldownBlockList[5].color = Color.black;
+                    cooldownBlockList[4].color = Color.black;
                     break;
             }
 
