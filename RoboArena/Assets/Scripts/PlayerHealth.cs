@@ -82,6 +82,11 @@ public class PlayerHealth : MonoBehaviour
         {
             power -= powerLoss;
         }
+
+        if(power <= 0)
+        {
+            TakeDamage(1);
+        }
     }
 
     void HealthBarFiller()

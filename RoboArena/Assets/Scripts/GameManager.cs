@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -15,6 +17,9 @@ public class GameManager : MonoBehaviour
     public GameObject playerInstance;
     public GameObject player;
     public int attackTime;
+    public int turnNumber = 0;
+
+    public TextMeshProUGUI turnText;
 
     public enum GameState
     {
@@ -31,6 +36,7 @@ public class GameManager : MonoBehaviour
         switch(newState) {
             case GameState.Playerturn:
             StartCoroutine(PlayerTurn());
+            turnNumber++;
             player.GetComponent<PlayerHealth>().PowerPerTurn(); //lose power per turn
                 break;
             case GameState.Enemyturn:
@@ -59,6 +65,11 @@ public class GameManager : MonoBehaviour
         UpdateGameState(GameState.Playerturn);
 
         moveManager.InitializePlayer();
+    }
+
+    void Update()
+    {
+        turnText.text = turnNumber.ToString("F0");
     }
     public void SpawnPlayerAtTileName(string tileName)
     {
@@ -111,7 +122,7 @@ public class GameManager : MonoBehaviour
 
         ClearTileSelect();
 
-        yield return new WaitForSeconds(0f); // Simulate enemy actions
+        yield return new WaitForSeconds(0.5f); // Simulate enemy actions
         //Debug.Log("Enemy turn ended.");
         UpdateGameState(GameState.Playerturn);
     }
