@@ -23,9 +23,12 @@ public class EnemyHealth : MonoBehaviour
                 healthBar[2].SetActive(false);
                 break;
             case(1):
+                healthBar[2].SetActive(false);
                 healthBar[1].SetActive(false);
                 break;
             case(0):
+                healthBar[2].SetActive(false);
+                healthBar[1].SetActive(false);
                 healthBar[0].SetActive(false);
                 break;
         }

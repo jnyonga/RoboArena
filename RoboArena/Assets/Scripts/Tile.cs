@@ -63,4 +63,8 @@ public class Tile : MonoBehaviour
         attackHighlight.SetActive(shouldHighlight);
     }
     
+    public bool IsWalkable()
+    {
+        return occupant == null; // If there's no occupant (enemy, obstacle), the tile is walkable
+    }   
 }

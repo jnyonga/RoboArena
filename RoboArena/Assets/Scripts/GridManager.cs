@@ -53,4 +53,16 @@ public class GridManager : MonoBehaviour
    {
         return allTiles; // Return the list of all tiles
    }
+
+   public bool IsTileWalkable(Vector2Int position)
+{
+    Tile tile = GetTileAtPosition(position);
+
+    if (tile == null)
+    {
+        return false; // Tile doesn't exist (out of bounds)
+    }
+
+    return tile.IsWalkable(); // Check the tile's own walkability status
+}
 }
