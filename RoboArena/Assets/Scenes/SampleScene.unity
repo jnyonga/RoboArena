@@ -5803,6 +5803,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1342439901354965314, guid: 45e19a4c5a8294f919a5a9fe6c6b8949, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1755758504037703636, guid: 60c9ca6f2046d47af9f7deb8ab9a6a02, type: 3}
+    - target: {fileID: 1342439901354965314, guid: 45e19a4c5a8294f919a5a9fe6c6b8949, type: 3}
       propertyPath: turnText
       value: 
       objectReference: {fileID: 1896704404}
