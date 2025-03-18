@@ -11,6 +11,7 @@ TagManager:
   - Power
   - TXTpower
   - TXThealth
+  - Game Manager
   layers:
   - Default
   - TransparentFX

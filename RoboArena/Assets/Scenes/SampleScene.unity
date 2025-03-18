@@ -2998,14 +2998,6 @@ PrefabInstance:
       propertyPath: moveManager
       value: 
       objectReference: {fileID: 377216723}
-    - target: {fileID: 1342439901354965314, guid: 45e19a4c5a8294f919a5a9fe6c6b8949, type: 3}
-      propertyPath: spawnTileName
-      value: Tile 4 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 1342439901354965314, guid: 45e19a4c5a8294f919a5a9fe6c6b8949, type: 3}
-      propertyPath: playerSpawnTileName
-      value: Tile 4 4
-      objectReference: {fileID: 0}
     - target: {fileID: 5371970132080860663, guid: 45e19a4c5a8294f919a5a9fe6c6b8949, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.5547092

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1342439901354965314}
   m_Layer: 0
   m_Name: GameManager
-  m_TagString: Untagged
+  m_TagString: Game Manager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -44,5 +44,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf84b82d380be4ff2b49aac3128704f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  State: 0
   gridManager: {fileID: 2578129846218771220, guid: 4851a76f11e5a412fbfe54ef7be77b71, type: 3}
   playerPrefab: {fileID: 1755758504037703636, guid: 60c9ca6f2046d47af9f7deb8ab9a6a02, type: 3}
+  playerSpawnTileName: Tile 4 4
+  moveManager: {fileID: 0}
+  playerInstance: {fileID: 0}
+  player: {fileID: 0}
+  attackTime: 0

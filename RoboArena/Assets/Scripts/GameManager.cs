@@ -109,15 +109,20 @@ public class GameManager : MonoBehaviour
 
         attackTime = 0;
 
+        ClearTileSelect();
+
+        yield return new WaitForSeconds(0f); // Simulate enemy actions
+        //Debug.Log("Enemy turn ended.");
+        UpdateGameState(GameState.Playerturn);
+    }
+
+    public void ClearTileSelect()
+    {
         List<Tile> allTiles = gridManager.GetAllTiles(); // Get all tiles
 
         foreach (Tile tile in allTiles)
         {
             tile.DeselectAttack();
         }
-
-        yield return new WaitForSeconds(0f); // Simulate enemy actions
-        //Debug.Log("Enemy turn ended.");
-        UpdateGameState(GameState.Playerturn);
     }
 }

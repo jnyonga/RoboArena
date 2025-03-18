@@ -7,6 +7,7 @@ public class MoveManager : MonoBehaviour
 {
     [SerializeField] private GridManager gridManager;
     [SerializeField] private PlayerMovement playerMovement;
+    private GameManager gameManager;
     private GameObject player;
     public Vector2Int facingDirection = Vector2Int.up;
 
@@ -15,6 +16,7 @@ public class MoveManager : MonoBehaviour
         gridManager = GameObject.FindGameObjectWithTag("Grid Manager").GetComponent<GridManager>();
         playerMovement = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
         player = GameObject.FindGameObjectWithTag("Player");
+        gameManager = GameObject.FindGameObjectWithTag("Game Manager").GetComponent<GameManager>();
     }
 
     public void InitializePlayer()
@@ -26,10 +28,12 @@ public class MoveManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Q)) // Rotate clockwise
         {
+            gameManager.ClearTileSelect();
             RotatePlayer(-90);
         }
         else if (Input.GetKeyDown(KeyCode.E)) // Rotate counterclockwise
         {
+            gameManager.ClearTileSelect();
             RotatePlayer(90);
         }
         
