@@ -19,12 +19,18 @@ public class BigGuyAI : MonoBehaviour
         gameManager = GameManager.Instance;
         player = GameObject.FindGameObjectWithTag("Player").transform;
 
+
         GameManager.OnGameStateChanged += HandleTurnChange;
+
+        // Register initial position as occupied
+        gridManager.OccupyTile(enemyGridPos, this);
     }
 
     void OnDestroy()
     {
         GameManager.OnGameStateChanged -= HandleTurnChange;
+        gridManager.UnoccupyTile(enemyGridPos); // Free the tile when enemy is destroyed
+        
     }
 
     void HandleTurnChange(GameManager.GameState state)
@@ -52,7 +58,7 @@ public class BigGuyAI : MonoBehaviour
 
         yield return new WaitForSeconds(0.5f); // Delay to show movement/attack animation
         isActing = false;
-        gameManager.UpdateGameState(GameManager.GameState.Playerturn);
+        //gameManager.UpdateGameState(GameManager.GameState.Playerturn);
     }
     
     void UpdatePositions()
@@ -77,8 +83,9 @@ public class BigGuyAI : MonoBehaviour
         Vector2Int direction = GetMoveDirection();
         Vector2Int targetPos = enemyGridPos + direction;
 
-        if (gridManager.IsTileWalkable(targetPos))
+        if (gridManager.IsTileWalkable(targetPos) && !gridManager.IsTileOccupied(targetPos))
         {
+            gridManager.ReserveTile(targetPos, this); // Reserve tile to avoid conflicts
             StartCoroutine(MoveToPosition(targetPos));
         }
     }
@@ -112,5 +119,10 @@ public class BigGuyAI : MonoBehaviour
         }
 
         transform.position = endPos;
+
+        // Update occupied tiles after movement
+        gridManager.UnoccupyTile(enemyGridPos); // Free old position
+        enemyGridPos = targetPos;               // Update to new position
+        gridManager.OccupyTile(enemyGridPos, this); // Mark new position as occupied
     }
 }

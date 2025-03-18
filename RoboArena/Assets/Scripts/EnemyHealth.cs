@@ -6,11 +6,13 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] public int health;
     [SerializeField] public int maxHealth;
 
+    private GameObject playerGO;
     public GameObject[] healthBar;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        playerGO = GameObject.FindGameObjectWithTag("Player");
         health = maxHealth;
     }
 
@@ -57,6 +59,7 @@ public class EnemyHealth : MonoBehaviour
 
     public void Die()
     {
+        playerGO.GetComponent<PlayerHealth>().GainPower();
         Destroy(gameObject);
     }
 }

@@ -196,7 +196,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 2
-  moveSpeed: 0
+  moveSpeed: 0.05
   isActing: 0
 --- !u!1 &5946679811896896412
 GameObject:

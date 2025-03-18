@@ -49,6 +49,11 @@ public class PlayerHealth : MonoBehaviour
             health = maxHealth;
         }
 
+        if (power > maxPower)
+        {
+            power = maxPower;
+        }
+
     }
     public void TakeDamage(int damage)
     {
@@ -65,7 +70,7 @@ public class PlayerHealth : MonoBehaviour
 
     public void HealthPerTurn()
     {
-        if (health < maxHealth)
+        if (health < maxHealth && power != 0)
         {
             health += healthRegen;
         }
@@ -73,7 +78,10 @@ public class PlayerHealth : MonoBehaviour
 
     public void PowerPerTurn()
     {
-        power -= powerLoss;
+        if(power > 0)
+        {
+            power -= powerLoss;
+        }
     }
 
     void HealthBarFiller()
@@ -86,6 +94,11 @@ public class PlayerHealth : MonoBehaviour
     {
         powerBar.GetComponent<Image>().fillAmount = power / maxPower;
         powerTXT.text = power.ToString("F0");
+    }
+
+    public void GainPower()
+    {
+        power += 10;
     }
 
 }

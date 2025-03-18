@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public class GridManager : MonoBehaviour
 {
+    private Dictionary<Vector2Int, BigGuyAI> occupiedTiles = new Dictionary<Vector2Int, BigGuyAI>();
    [SerializeField] public int width, height;
 
    [SerializeField] private Tile tilePrefab;
@@ -50,19 +51,45 @@ public class GridManager : MonoBehaviour
     }
 
     public List<Tile> GetAllTiles()
-   {
-        return allTiles; // Return the list of all tiles
-   }
-
-   public bool IsTileWalkable(Vector2Int position)
-{
-    Tile tile = GetTileAtPosition(position);
-
-    if (tile == null)
     {
-        return false; // Tile doesn't exist (out of bounds)
+        return allTiles; // Return the list of all tiles
     }
 
-    return tile.IsWalkable(); // Check the tile's own walkability status
-}
+   public bool IsTileWalkable(Vector2Int position)
+    {
+        Tile tile = GetTileAtPosition(position);
+
+        if (tile == null)
+        {
+            return false; // Tile doesn't exist (out of bounds)
+        }
+
+        return tile.IsWalkable(); // Check the tile's own walkability status
+    }
+
+    public bool IsTileOccupied(Vector2Int position)
+    {   
+    return occupiedTiles.ContainsKey(position);
+    }
+
+    public void OccupyTile(Vector2Int position, BigGuyAI enemy)
+    {
+        occupiedTiles[position] = enemy;
+    }
+
+    public void UnoccupyTile(Vector2Int position)
+    {
+        if (occupiedTiles.ContainsKey(position))
+        {
+            occupiedTiles.Remove(position);
+        }
+    }
+
+    public void ReserveTile(Vector2Int position, BigGuyAI enemy)
+    {
+        if (!occupiedTiles.ContainsKey(position))
+        {
+            occupiedTiles[position] = enemy; // Reserve tile to prevent multiple enemies from moving there
+        }
+    }
 }
