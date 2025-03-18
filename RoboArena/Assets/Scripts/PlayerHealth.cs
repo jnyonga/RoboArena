@@ -11,7 +11,6 @@ public class PlayerHealth : MonoBehaviour
     public float power = 100;
     private float maxPower = 100;
     private int powerLoss = 1;
-    private int i = 0;
 
     [Header("Object References")]
     [SerializeField] GameObject healthBar;
@@ -49,6 +48,7 @@ public class PlayerHealth : MonoBehaviour
         {
             health = maxHealth;
         }
+
     }
     public void TakeDamage(int damage)
     {
@@ -73,18 +73,7 @@ public class PlayerHealth : MonoBehaviour
 
     public void PowerPerTurn()
     {
-        while (i < 10)
-        {
-            if(i == 9)
-            {
-                power -= powerLoss;
-                i = 0;
-                return;
-            }
-
-            i++;
-        }
-        
+        power -= powerLoss;
     }
 
     void HealthBarFiller()
