@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject playerPrefab;
     [SerializeField] private string playerSpawnTileName;
     [SerializeField] private MoveManager moveManager;
+    private EnemyManager enemyManager;
     public GameObject playerInstance;
     public GameObject player;
     public int attackTime;
@@ -35,9 +37,10 @@ public class GameManager : MonoBehaviour
 
         switch(newState) {
             case GameState.Playerturn:
-            StartCoroutine(PlayerTurn());
             turnNumber++;
+            StartCoroutine(PlayerTurn());
             player.GetComponent<PlayerHealth>().PowerPerTurn(); //lose power per turn
+            enemyManager.CheckForWaveCompletion();
                 break;
             case GameState.Enemyturn:
             StartCoroutine(EnemyTurn());
@@ -57,6 +60,7 @@ public class GameManager : MonoBehaviour
         Instance = this;
         gridManager = GameObject.FindGameObjectWithTag("Grid Manager").GetComponent<GridManager>();
         moveManager = GameObject.FindGameObjectWithTag("Move Manager").GetComponent<MoveManager>();
+        enemyManager = GameObject.FindGameObjectWithTag("Enemy Manager").GetComponent<EnemyManager>();
     }
 
     void Start()
@@ -70,6 +74,16 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         turnText.text = turnNumber.ToString("F0");
+
+        if(Input.GetKeyDown(KeyCode.R))
+        {
+            SceneManager.LoadScene(0);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
     }
     public void SpawnPlayerAtTileName(string tileName)
     {

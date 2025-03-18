@@ -10,7 +10,7 @@ public class PlayerHealth : MonoBehaviour
 
     public float power = 100;
     private float maxPower = 100;
-    private int powerLoss = 1;
+    private int powerLoss = 2;
 
     [Header("Object References")]
     [SerializeField] GameObject healthBar;
@@ -27,6 +27,8 @@ public class PlayerHealth : MonoBehaviour
         healthTXT = GameObject.FindGameObjectWithTag("TXThealth").GetComponent<TextMeshProUGUI>();
         powerBar = GameObject.FindGameObjectWithTag("Power");
         powerTXT = GameObject.FindGameObjectWithTag("TXTpower").GetComponent<TextMeshProUGUI>();
+
+        gameObject.SetActive(true);
     }
     void Update()
     {
@@ -65,7 +67,7 @@ public class PlayerHealth : MonoBehaviour
 
     public void Die()
     {
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 
     public void HealthPerTurn()
@@ -103,7 +105,7 @@ public class PlayerHealth : MonoBehaviour
 
     public void GainPower()
     {
-        power += 10;
+        power += 0;
     }
 
 }

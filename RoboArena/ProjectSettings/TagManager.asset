@@ -12,6 +12,7 @@ TagManager:
   - TXTpower
   - TXThealth
   - Game Manager
+  - Enemy Manager
   layers:
   - Default
   - TransparentFX
