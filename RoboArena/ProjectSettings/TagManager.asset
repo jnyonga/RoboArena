@@ -7,6 +7,10 @@ TagManager:
   - Grid Manager
   - Enemy
   - Move Manager
+  - Health
+  - Power
+  - TXTpower
+  - TXThealth
   layers:
   - Default
   - TransparentFX

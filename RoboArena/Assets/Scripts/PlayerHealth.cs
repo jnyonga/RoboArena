@@ -1,20 +1,39 @@
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class PlayerHealth : MonoBehaviour
 {
-    public int health = 10;
-    private int maxHealth = 10;
+    public float health = 10;
+    private float maxHealth = 10;
     private int healthRegen = 1;
 
-    public int power = 100;
+    public float power = 100;
+    private float maxPower = 100;
     private int powerLoss = 1;
     private int i = 0;
+
+    [Header("Object References")]
+    [SerializeField] GameObject healthBar;
+    [SerializeField] GameObject powerBar;
+    private TextMeshProUGUI healthTXT;
+    private TextMeshProUGUI powerTXT;
+    
     void Start()
     {
         health = maxHealth;
+        power = maxPower;
+
+        healthBar = GameObject.FindGameObjectWithTag("Health");
+        healthTXT = GameObject.FindGameObjectWithTag("TXThealth").GetComponent<TextMeshProUGUI>();
+        powerBar = GameObject.FindGameObjectWithTag("Power");
+        powerTXT = GameObject.FindGameObjectWithTag("TXTpower").GetComponent<TextMeshProUGUI>();
     }
     void Update()
     {
+        PowerBarFiller();
+        HealthBarFiller();
+
         if(Input.GetKeyDown(KeyCode.I))
         {
             TakeDamage(1);
@@ -46,7 +65,10 @@ public class PlayerHealth : MonoBehaviour
 
     public void HealthPerTurn()
     {
-        health += healthRegen;
+        if (health < maxHealth)
+        {
+            health += healthRegen;
+        }
     }
 
     public void PowerPerTurn()
@@ -63,6 +85,18 @@ public class PlayerHealth : MonoBehaviour
             i++;
         }
         
+    }
+
+    void HealthBarFiller()
+    {
+        healthBar.GetComponent<Image>().fillAmount = health / maxHealth;
+        healthTXT.text = health.ToString("F0");
+    }
+
+    void PowerBarFiller()
+    {
+        powerBar.GetComponent<Image>().fillAmount = power / maxPower;
+        powerTXT.text = power.ToString("F0");
     }
 
 }
