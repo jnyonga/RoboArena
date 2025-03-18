@@ -43,7 +43,7 @@ public class MoveManager : MonoBehaviour
         facingDirection = RotateVector(facingDirection, angle);
         player.transform.Rotate(0, 0, angle);
 
-        GameManager.Instance.UpdateGameState(GameManager.GameState.Enemyturn);
+        //GameManager.Instance.UpdateGameState(GameManager.GameState.Enemyturn);
     }
 
     Vector2Int RotateVector(Vector2Int dir, float angle)

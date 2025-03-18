@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private string playerSpawnTileName;
     [SerializeField] private MoveManager moveManager;
     public GameObject playerInstance;
+    public GameObject player;
     public int attackTime;
 
     public enum GameState
@@ -30,6 +31,7 @@ public class GameManager : MonoBehaviour
         switch(newState) {
             case GameState.Playerturn:
             StartCoroutine(PlayerTurn());
+            player.GetComponent<PlayerHealth>().PowerPerTurn(); //lose power per turn
                 break;
             case GameState.Enemyturn:
             StartCoroutine(EnemyTurn());
@@ -71,6 +73,8 @@ public class GameManager : MonoBehaviour
             
             playerInstance = Instantiate(playerPrefab, targetTile.transform.position, Quaternion.identity);
             targetTile.SetOccupant(playerInstance);
+
+            player = GameObject.FindGameObjectWithTag("Player");
         }
         else
         {

@@ -90,6 +90,8 @@ public class PlayerMovement : MonoBehaviour
         gridPosition = targetPosition;
         isMoving = false;
 
+        gameObject.GetComponent<PlayerHealth>().HealthPerTurn(); //heal player per turn
+
         GameManager.Instance.UpdateGameState(GameManager.GameState.Enemyturn);
     }
 

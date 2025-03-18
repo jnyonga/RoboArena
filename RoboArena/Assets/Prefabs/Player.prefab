@@ -102,6 +102,7 @@ GameObject:
   - component: {fileID: 7056732019602538514}
   - component: {fileID: 117052846613263254}
   - component: {fileID: 2208558762839391178}
+  - component: {fileID: -794225045926345818}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -290,3 +291,17 @@ MonoBehaviour:
   moveManager: {fileID: 0}
   isReady: 0
   cooldownTurns: 5
+--- !u!114 &-794225045926345818
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1755758504037703636}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f74ebde4b184f40f3a7f87ed2bc84389, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 10
+  power: 100

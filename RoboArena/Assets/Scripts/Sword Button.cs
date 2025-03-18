@@ -76,7 +76,7 @@ public class SwordButton : MonoBehaviour
 
         
 
-        GameManager.Instance.UpdateGameState(GameManager.GameState.Enemyturn);
+        //GameManager.Instance.UpdateGameState(GameManager.GameState.Enemyturn);
     }
 
 }
